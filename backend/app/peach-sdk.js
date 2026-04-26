@@ -112,29 +112,32 @@
         eventName: eventName,
         payload: payload
       })
-      return
+      return Promise.resolve()
     }
 
     var eventData = getBasePayload(eventName, payload)
 
     log("track", eventData)
 
-    sendToParent(eventData)
-
     if (!config.apiUrl) {
-      return
+      sendToParent(eventData)
+      return Promise.resolve()
     }
 
-    fetch(config.apiUrl.replace(/\/$/, "") + "/events", {
+    return fetch(config.apiUrl.replace(/\/$/, "") + "/events", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "text/plain"
       },
       keepalive: true,
       body: JSON.stringify(eventData)
-    }).catch(function (error) {
-      log("event send failed", error)
     })
+      .catch(function (error) {
+        log("event send failed", error)
+      })
+      .finally(function () {
+        sendToParent(eventData)
+      })
   }
 
   function flushQueue() {

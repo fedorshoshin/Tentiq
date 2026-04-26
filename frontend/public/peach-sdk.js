@@ -128,7 +128,7 @@
     fetch(config.apiUrl.replace(/\/$/, "") + "/events", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "text/plain"
       },
       keepalive: true,
       body: JSON.stringify(eventData)

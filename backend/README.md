@@ -1,4 +1,4 @@
-# Tentiq backend
+# hack_nation_back
 
 FastAPI backend for the hackathon project.
 
