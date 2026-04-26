@@ -1,4 +1,4 @@
-# Tantiq backend
+# Tentiq backend
 
 FastAPI backend for the hackathon project.
 
